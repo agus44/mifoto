@@ -4,15 +4,15 @@
       <div class="carousel-inner">
       
         <div class="item active">
-          <img src="<?php echo base_url();?>images/Wurth1.jpg" width="760px" height="400px">
+          <img src="<?php echo base_url();?>images/2.jpg" width="820px" height="350px">
            <div class="carousel-caption">
-            <h4><a href="#">Bienvenido al Nuevo Sistema Wurth</a></h4>
-            <p>Nuevo sistema desarrollado para las áreas operativas de logistica y producción, orientado al almacenamiento de productos, importaciones y control de inventario.<a class="label label-primary" href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank">Free Bootstrap Carousel Collection</a></p>
+            <h4><a href="#">Bienvenido al Nuevo Sistema RR.HH Mi foto</a></h4>
+            <p>Nuevo sistema desarrollado para las áreas operativas de RR.HH orientado a soluciones informáticas integrada con softland.<a class="label label-primary" href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank">Free Bootstrap Carousel Collection</a></p>
           </div>
         </div><!-- End Item -->
  
          <div class="item">
-          <img src="<?php echo base_url();?>images/Wurth2.png" width="760px" height="400px">
+          <img src="<?php echo base_url();?>images/1.jpg" width="820px" height="350px">
            <div class="carousel-caption">
             <h4><a href="#">Nuevas Tecnologías Desarrolladas</a></h4>
             <p>Éste sistema ha sido desarrollado con tecnologías especializadas para operar de forma más rápida y que se adapta en cualquier dispositivo móvil. Gracias a las herramientas de Boostrap y Codeigniter.<a class="label label-primary" href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank">Free Bootstrap Carousel Collection</a></p>
@@ -20,10 +20,10 @@
         </div><!-- End Item -->
         
         <div class="item">
-          <img src="<?php echo base_url();?>images/Wurth3.jpg" width="760px" height="400px">
+          <img src="<?php echo base_url();?>images/3.jpg" width="820px" height="350px">
            <div class="carousel-caption">
-            <h4><a href="#">Almacenamiento y Control Logístico</a></h4>
-            <p>Sistema encargado de la planificación de almacenamiento de productos e importaciones<a class="label label-primary" href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank">Free Bootstrap Carousel Collection</a></p>
+            <h4><a href="#">Dualidad</a></h4>
+            <p>Sistema encargado de integrar softland con bases de datos propias<a class="label label-primary" href="http://sevenx.de/demo/bootstrap-carousel/" target="_blank">Free Bootstrap Carousel Collection</a></p>
           </div>
         </div><!-- End Item -->
                  
@@ -31,9 +31,9 @@
 
 
     <ul class="list-group col-sm-4">
-      <li data-target="#myCarousel" data-slide-to="0" class="list-group-item active"><h4>Bienvenido al Nuevo Sistema Wurth</h4></li>
+      <li data-target="#myCarousel" data-slide-to="0" class="list-group-item active"><h4>Bienvenido al Nuevo Mi Foto</h4></li>
       <li data-target="#myCarousel" data-slide-to="1" class="list-group-item"><h4>Nuevas Tecnologías Desarrolladas</h4></li>
-      <li data-target="#myCarousel" data-slide-to="2" class="list-group-item"><h4>Almacenamiento y Control Logístico</h4></li>
+      <li data-target="#myCarousel" data-slide-to="2" class="list-group-item"><h4>Almacenamiento y Sistema Switch de Base de Datos</h4></li>
     </ul>
 
       <!-- Controls -->

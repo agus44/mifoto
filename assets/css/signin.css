@@ -86,8 +86,8 @@ body {
   color:#FFFFFF;
 }
 #myCarousel .list-group .active { 
-  background-color: #CC0000;
-  color:#FFFFFF;
+  background-color: #00B7FF;
+  color:#000000;
 }
 
 @media (min-width: 992px) { 
