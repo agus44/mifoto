@@ -18,7 +18,7 @@ class RecursoHumano extends CI_Controller {
 		$menu=$this->menu_dinamico->crea_menu($this->id_user,$this->username,$this->type);
 		$this->load->view('plantilla/header');
 		$this->load->view('plantilla/menu',$menu);
-		
+		$this->load->view('rrhh/ing_variables',$menu);
 		$this->load->view('plantilla/footer');
 	}
 }
