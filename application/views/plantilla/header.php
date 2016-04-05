@@ -11,7 +11,7 @@
     <link href="<?php echo base_url();?>assets/css/sweet-alert.css" rel="stylesheet"> 
     <link href="<?php echo base_url();?>assets/css/datepicker.css" rel="stylesheet"> 
      
-    <title>Sistema Wurth</title>
+    <title>Sistema MiFoto</title>
 
     <script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
     <script src="<?php echo base_url();?>assets/js/bootstrap.js"></script>
