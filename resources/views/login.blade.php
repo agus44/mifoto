@@ -9,7 +9,7 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Ingresa para iniciar tu sesión</p>
-        <form action="../../index2.html" method="post">
+        <form action="{{ URL::to('login') }}" method="post" role="form" id="form" name="form">
           <div class="form-group has-feedback">
             <input type="text" class="form-control" placeholder="Nombre de Usuario" id="usuario" name="usuario">
             <span class="glyphicon  glyphicon-user form-control-feedback"></span>
@@ -18,8 +18,9 @@
             <input type="password" class="form-control" placeholder="Password" id="clave" name="clave">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+           <input type="hidden" name="_token" value="{{ csrf_token() }}"><br>
           <div class="form-group has-feedback">
-            <center><button class="btn btn-primary">Ingresar</button></center>
+            <center><button class="btn btn-primary" type="submit">Ingresar</button></center>
           </div>
         </form>
       </div><!-- /.login-box-body -->
