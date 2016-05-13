@@ -18,6 +18,11 @@
             <input type="password" class="form-control" placeholder="Password" id="clave" name="clave">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
+          @if(Session::has('error'))
+                    <div class="alert alert-danger error-login">
+                        {{ Session::get('error') }}
+                    </div>
+                        @endif
            <input type="hidden" name="_token" value="{{ csrf_token() }}"><br>
           <div class="form-group has-feedback">
             <center><button class="btn btn-primary" type="submit">Ingresar</button></center>
