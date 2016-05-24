@@ -210,19 +210,40 @@
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    Page Header
-                    <small>Optional description</small>
+                    Ultimas Noticias 
+                    <small>Sistema ERP TomahawkGT</small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                    <li class="active">Here</li>
-                </ol>
+                
             </section>
 
             <!-- Main content -->
             <section class="content">
 
-                <!-- Your Page Content Here -->
+                <div id="carrusel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                <li data-target="#carrusel" data-slide-to="0" class="active"></li>
+                <li data-target="#carrusel" data-slide-to="0" class=""></li>
+                <li data-target="#carrusel" data-slide-to="0" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img src="{{asset('fondo.jpg')}}" alt="First Slide" />
+                        <div class="carousel-caption">First Slide</div>
+                    </div>
+                    <div class="item ">
+                        <img src="{{asset('fondo.jpg')}}" alt="Second Slide" />
+                        <div class="carousel-caption">Second Slide</div>
+                    </div>
+                    <div class="item ">
+                        <img src="{{asset('fondo.jpg')}}" alt="Tercer Slide" />
+                        <div class="carousel-caption">Tercer Slide</div>
+                    </div>
+                </div>
+                <a class="left carousel-control" href="#carrusel" data-slide="prev"><span class="fa fa-angle-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carrusel" data-slide="next"><span class="fa fa-angle-right"></span>
+                </a>
+                </div>
 
             </section><!-- /.content -->
         </div><!-- /.content-wrapper -->
@@ -231,10 +252,10 @@
         <footer class="main-footer">
             <!-- To the right -->
             <div class="pull-right hidden-xs">
-                Anything you want
+                
             </div>
             <!-- Default to the left -->
-            <strong>Copyright © 2015 <a href="#">Company</a>.</strong> All rights reserved.
+            <strong>Copyright © 2016 <a href="#">Tomahawk GT Softwares</a>.</strong> Todos los derechos reservados.
         </footer>
 
     </div><!-- ./wrapper -->
