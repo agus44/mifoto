@@ -1,11 +1,17 @@
 <html>
 <head>
 	@include('plantilla')
+<style>
+body{
+  background-image:url('fondo.jpg');
+  background-repeat:no-repeat;
+}
+</style>
 </head>
-<body  class="hold-transition login-page">
+<body >
 <div class="login-box animated fadeInDown">
       <div class="login-logo">
-        <a href="../../index2.html"><b>Tomahawk GT</b>Softwares</a>
+        <a href="../../index2.html" style="color:#ffffff"><b >Tomahawk GT</b>  Softwares</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Ingresa para iniciar tu sesión</p>
@@ -19,7 +25,7 @@
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           @if(Session::has('error'))
-                    <div class="alert alert-danger alert-dismissible">
+                    <div class="alert alert-danger alert-dismissible fadeInDown">
                       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                       <h4>
                         <i class="icon fa fa-ban"></i>
