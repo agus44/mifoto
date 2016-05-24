@@ -3,7 +3,7 @@
 	@include('plantilla')
 </head>
 <body  class="hold-transition login-page">
-<div class="login-box">
+<div class="login-box animated fadeInDown">
       <div class="login-logo">
         <a href="../../index2.html"><b>Tomahawk GT</b>Softwares</a>
       </div><!-- /.login-logo -->
