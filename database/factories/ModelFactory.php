@@ -29,3 +29,15 @@ $factory->define(App\models\Usuarios::class, function (Faker\Generator $faker) {
         'id_empresa'=> $faker->name
     ];
 });
+
+$factory->define(App\models\Menu::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->name,
+        'nombre' => $faker->name,
+        'id_padre' => $faker->name,
+        'url' => $faker->name,
+        'icono'=> $faker->name,
+        'clase'=> $faker->name,
+        'visible'=> $faker->name,
+    ];
+});
