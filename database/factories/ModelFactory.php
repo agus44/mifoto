@@ -26,5 +26,6 @@ $factory->define(App\models\Usuarios::class, function (Faker\Generator $faker) {
         'pass' => $faker->name,
         'tipo_usuario' => $faker->name,
         'nombre' => $faker->name,
+        'id_empresa'=> $faker->name
     ];
 });

@@ -18,6 +18,7 @@ class CreaTablaUsuarios extends Migration
             $table->string('pass');
             $table->integer('tipo_usuario');
             $table->string('nombre')->nullable();
+            $table->integer('id_empresa');
             $table->timestamps();
         });
     }

@@ -57,10 +57,11 @@ class ConfiguracionController extends Controller
       if($datos)
       {
          Session::put('logeado',     true);
-         Session::put('idusuario',   $datos[0]->id);
+         Session::put('id_usuario',   $datos[0]->id);
          Session::put('nom_usuario', $datos[0]->usuario);
-         Session::put('tipo',         $datos[0]->tipo_usuario);
+         Session::put('id_tipo',         $datos[0]->tipo_usuario);
          Session::put('nombre_completo',         $datos[0]->nombre);
+         Session::put('id_empresa',  $datos[0]->id_empresa);
         return 1;
       }
       else

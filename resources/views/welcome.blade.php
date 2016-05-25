@@ -2,7 +2,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>Template LTE</title>
+        <title>Sistema ERP</title>
         @include('plantilla')
     </head>
     <body class="skin-blue">
@@ -39,7 +39,7 @@
                                             <a href="#">
                                                 <div class="pull-left">
                                                     <!-- User Image -->
-                                                    <img src="{{ asset('template/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image"/>
+                                                    <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="img-circle" alt="User Image"/>
                                                 </div>
                                                 <!-- Message title and timestamp -->
                                                 <h4>
@@ -118,14 +118,14 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="{{ asset('template/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image"/>
+                                <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="user-image" alt="User Image"/>
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{{Session::get('nombre_completo')}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="{{ asset('template/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image" />
+                                    <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="img-circle" alt="User Image" />
                                     <p>
                                         {{Session::get('nombre_completo')}} - Web Developer
                                         <small>Member since Nov. 2012</small>
@@ -167,7 +167,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ asset('template/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image" />
+                        <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
                         <p>{{Session::get('nombre_completo')}}</p>
@@ -255,7 +255,7 @@
                 
             </div>
             <!-- Default to the left -->
-            <strong>Copyright © 2016 <a href="#">Tomahawk GT Softwares</a>.</strong> Todos los derechos reservados.
+           <center> <strong>Copyright © 2016 <a href="#">Tomahawk GT Softwares</a>.</strong> Todos los derechos reservados.</center>
         </footer>
 
     </div><!-- ./wrapper -->
