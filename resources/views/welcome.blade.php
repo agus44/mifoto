@@ -219,7 +219,7 @@
             <!-- Main content -->
             <section class="content">
 
-                <div id="carrusel" class="carousel slide" data-ride="carousel">
+                <div id="carrusel" class="carousel slide animated fadeInRight" data-ride="carousel">
                 <ol class="carousel-indicators">
                 <li data-target="#carrusel" data-slide-to="0" class="active"></li>
                 <li data-target="#carrusel" data-slide-to="0" class=""></li>
