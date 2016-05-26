@@ -13,7 +13,7 @@ use App\models\configuracion;
 
 class ConfiguracionController extends Controller
 {
-   
+   /****************************************************************************************/
     public function index()
     {
        if (Session::get('logeado')==true){
@@ -74,7 +74,10 @@ class ConfiguracionController extends Controller
 
     public function home()
     {
-        return view('welcome');
+        $data['titulo']='Últimas Noticias';
+        $data['subtitulo']="Sistema ERP TomahawkGT";
+        $data['menus']=configuracion::all_menus();
+        return view('home.slider',$data);
     }
 
     public function logout()
@@ -82,5 +85,15 @@ class ConfiguracionController extends Controller
      
         Session::flush();
         return Redirect::to('/');    
+    }
+
+    /***********************************************************************************************************************/
+
+    public function configuracion($menu)
+    {
+      $data['titulo']='Configuración';
+      $data['subtitulo']="Sistema ERP TomahawkGT";
+      $data['menus']=configuracion::menus_hijos($menu);
+      return view('configuracion.index',$data);
     }
 }

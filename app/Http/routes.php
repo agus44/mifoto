@@ -5,3 +5,4 @@ Route::get('/inicio', 'ConfiguracionController@inicio');
 Route::post('/login', 'ConfiguracionController@login');
 Route::get('/home','ConfiguracionController@home');
 Route::get('/logout','ConfiguracionController@logout');
+Route::get('/configuracion/{menu}','ConfiguracionController@configuracion');
