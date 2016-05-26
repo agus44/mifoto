@@ -196,13 +196,29 @@
                     <li><a href="{{asset($row->url)}}"><i class="{{$row->clase}}"></i><span>{{$row->nombre}}</span></a></li>
                     @endif
                     @endforeach
-                    <li class="treeview">
-                        <a href="#"><span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
-                        <ul class="treeview-menu">
-                            <li><a href="#">Link in level 2</a></li>
-                            <li><a href="#">Link in level 2</a></li>
-                        </ul>
-                    </li>
+                    
+                    
+                        @foreach($menus as $menu1)
+                        
+                            @if($menu1->id_padre!==null)
+                            <li class="treeview">
+                            <a href="{{asset($menu1->url)}}"><i class="{{$menu1->clase}}"></i><span>{{$menu1->nombre}}</span> <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="treeview-menu">
+                                @for($i=0;$i<count($menus_hijos);$i++)
+                                @for($t=0;$t<count($menus_hijos[$i]);$t++)
+                                @if($menus_hijos[$i][$t]->id_padre==$menu1->id)
+                                
+                                <li><a href="{{asset($menus_hijos[$i][$t]->url)}}"><i class="{{$menus_hijos[$i][$t]->clase}}"></i> {{$menus_hijos[$i][$t]->nombre}}</a></li>
+                                @endif
+                              @endfor
+                              @endfor
+                             </ul>
+                            </li>
+                            @endif
+                         @endforeach   
+                      
+                        
+                    
                 </ul><!-- /.sidebar-menu -->
             </section>
             <!-- /.sidebar -->

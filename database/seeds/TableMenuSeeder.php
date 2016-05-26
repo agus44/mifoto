@@ -45,6 +45,32 @@ class TableMenuSeeder extends Seeder
                 'clase'=>'fa fa-list-ol',
                 'visible'=>1
             ]);
+
+        factory(App\models\Menu::class)->create([
+                'nombre'=>'Permisos',
+                'id_padre'=>1,
+                'url'=>'/permisos/5',
+                'icono'=>null,
+                'clase'=>'fa fa-lock',
+                'visible'=>1
+            ]);
+
+        factory(App\models\Menu::class)->create([
+                'nombre'=>'Permisos Por Rol',
+                'id_padre'=>5,
+                'url'=>'/permisos_rol/6',
+                'icono'=>null,
+                'clase'=>'fa fa-flag',
+                'visible'=>1
+            ]);
+        factory(App\models\Menu::class)->create([
+                'nombre'=>'Permisos Por Usuario',
+                'id_padre'=>5,
+                'url'=>'/Listado_menu/7',
+                'icono'=>null,
+                'clase'=>'fa fa-user',
+                'visible'=>1
+            ]);
         
     }
 }
