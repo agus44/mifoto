@@ -106,8 +106,27 @@ class ConfiguracionController extends Controller
       $data['menus']=$this->menus_generales($menu);
       $data["menus_hijos"]=$this->menus_hijos($data['menus']);
       $data["empresas"]=configuracion::all_empresas();
-      $data["departamentos"]=configuracion::all_departamentos();
       return view('configuracion.permisos_rol',$data);
+    }
+
+    public function get_departamentos()
+    {
+      $empresa=$_POST['empresa'];
+      try{
+        $datos=configuracion::get_departamentos($empresa);
+        if($datos)
+        {
+          return json_encode($datos);
+        }
+        else
+        {
+          return 0;
+        }
+      }
+      catch (Exception $e) {
+         return 0;
+        }
+      
     }
 
     public function menus_generales($menu)

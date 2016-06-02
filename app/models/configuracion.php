@@ -44,4 +44,13 @@ class configuracion extends Model
         $deptos=Departamento::all();
         return $deptos;
     }
+
+    public static function get_departamentos($empresa)
+    {
+        $deptos=Departamento::where('id_empresa',$empresa)
+                            ->orderBy('id', 'asc')
+                            ->get(['id','nombre']);    
+
+        return $deptos;       
+    }
 }
