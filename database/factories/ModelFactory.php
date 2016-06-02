@@ -58,3 +58,12 @@ $factory->define(App\models\Departamento::class, function (Faker\Generator $fake
         'visible' => $faker->name
     ];
 });
+
+$factory->define(App\models\Roles::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->name,
+        'nombre' => $faker->name,
+        'id_depto' => $faker->name,
+        'visible' => $faker->name
+    ];
+});

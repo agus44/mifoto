@@ -7,6 +7,7 @@ use DB;
 use App\models\Menu;
 use App\models\Empresas;
 use App\models\Departamento;
+use App\models\Roles;
 class configuracion extends Model
 {
     public static function verificar_usuario($usuario,$clave)
@@ -53,4 +54,20 @@ class configuracion extends Model
 
         return $deptos;       
     }
+
+    public static function get_roles($depto)
+    {
+        $roles=Roles::where('id_depto',$depto)
+                    ->orderBy('id', 'asc')
+                    ->get(['id','nombre']);
+        return $roles;
+    }
+
+    public static function get_permisos_rol($rol)
+    {
+        $permisos=Menu::all();
+        return $permisos;
+    }
+
+
 }

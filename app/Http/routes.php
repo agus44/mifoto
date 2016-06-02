@@ -8,3 +8,5 @@ Route::get('/logout','ConfiguracionController@logout');
 Route::get('/configuracion/{menu}','ConfiguracionController@configuracion');
 Route::get('/permisos_rol/{menu}','ConfiguracionController@permisos_rol');
 Route::post('/get_departamentos','ConfiguracionController@get_departamentos');
+Route::post('/get_roles','ConfiguracionController@get_roles');
+Route::post('/get_permisos_rol','ConfiguracionController@get_permisos_rol');

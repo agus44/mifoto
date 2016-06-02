@@ -129,6 +129,46 @@ class ConfiguracionController extends Controller
       
     }
 
+    public function get_roles()
+    {
+      $depto=$_POST['dpto'];
+      try{
+        $datos=configuracion::get_roles($depto);
+        if($datos)
+        {
+          return json_encode($datos);
+        }
+        else
+        {
+          return 0;
+        }
+      }
+      catch (Exception $e) {
+         return 0;
+        }
+    }
+
+    public function get_permisos_rol()
+    {
+      $rol=$_POST['rol'];
+      try{
+        $datos=configuracion::get_permisos_rol($rol);
+        if($datos)
+        {
+          return json_encode($datos);
+        }
+        else
+        {
+          return 0;
+        }
+      }
+      catch (Exception $e)
+      {
+       return 0; 
+      }
+    }
+
+
     public function menus_generales($menu)
     {
        $menus=configuracion::menus_hijos($menu);
