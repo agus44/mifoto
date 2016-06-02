@@ -218,7 +218,7 @@
                          @endforeach   
                       
                         
-                    
+                    <li><a href="javascript:history.back()"><i class="fa fa-reply"></i><span>Volver</span></a></li>
                 </ul><!-- /.sidebar-menu -->
             </section>
             <!-- /.sidebar -->

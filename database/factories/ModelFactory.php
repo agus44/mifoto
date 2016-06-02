@@ -41,3 +41,20 @@ $factory->define(App\models\Menu::class, function (Faker\Generator $faker) {
         'visible'=> $faker->name,
     ];
 });
+
+$factory->define(App\models\Empresas::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->name,
+        'nombre' => $faker->name,
+        'visible' => $faker->name
+    ];
+});
+
+$factory->define(App\models\Departamento::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->name,
+        'nombre' => $faker->name,
+        'id_empresa' => $faker->name,
+        'visible' => $faker->name
+    ];
+});

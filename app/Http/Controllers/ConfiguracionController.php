@@ -93,16 +93,38 @@ class ConfiguracionController extends Controller
     {
       $data['titulo']='Configuración';
       $data['subtitulo']="Sistema ERP TomahawkGT";
-      $menus=configuracion::menus_hijos($menu);
-      $data['menus']=$menus;
+      $data['menus']=$this->menus_generales($menu);
+      $data["menus_hijos"]=$this->menus_hijos($data['menus']);
+     // dd($data["menus_hijos"]);
+      return view('configuracion.index',$data);
+    }
+
+    public function permisos_rol($menu)
+    {
+      $data['titulo']="Permisos Por Rol de Usuario";
+      $data['subtitulo']="Sistema ERP TomahawkGT";   
+      $data['menus']=$this->menus_generales($menu);
+      $data["menus_hijos"]=$this->menus_hijos($data['menus']);
+      $data["empresas"]=configuracion::all_empresas();
+      $data["departamentos"]=configuracion::all_departamentos();
+      return view('configuracion.permisos_rol',$data);
+    }
+
+    public function menus_generales($menu)
+    {
+       $menus=configuracion::menus_hijos($menu);
+       return $menus;
+    }
+
+    public function menus_hijos($menus)
+    {
       $menus_hijos=array();
       for($i=0;$i<count($menus);$i++)
       {
         $mh=configuracion::menus_hijos($menus[$i]->id);
         array_push($menus_hijos, $mh);
       }
-      $data["menus_hijos"]=$menus_hijos;
-     // dd($data["menus_hijos"]);
-      return view('configuracion.index',$data);
+
+      return $menus_hijos;
     }
 }
