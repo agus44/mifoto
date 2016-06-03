@@ -12,7 +12,8 @@
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="index2.html" class="logo"><b>Tomahawk GT</b>Software</a>
+            <!--<a href="index2.html" class="logo"><b>Tomahawk GT</b>Software</a>-->
+            <img src="{{asset('/archivos_empresas/2/logo.jpg')}}" width="13%" height="10%"/>
 
             <!-- Header Navbar -->
             <nav class="navbar navbar-static-top" role="navigation">
