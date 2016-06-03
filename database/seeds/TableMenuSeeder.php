@@ -80,6 +80,15 @@ class TableMenuSeeder extends Seeder
                 'clase'=>'fa fa-user',
                 'visible'=>1
             ]);
+
+         factory(App\models\Menu::class)->create([
+                'nombre'=>'Pedidos',
+                'id_padre'=>null,
+                'url'=>'/pedidos/9',
+                'icono'=>null,
+                'clase'=>'fa fa-shopping-cart',
+                'visible'=>1
+            ]);
         
     }
 }

@@ -15,5 +15,10 @@ class TableEmpresasSeeder extends Seeder
         		'nombre'=>'TomaHawk',
         		'visible'=>1
         	]);
+
+        factory(App\models\Empresas::class)->create([
+                'nombre'=>'Williamson Industrial',
+                'visible'=>1
+            ]);
     }
 }
