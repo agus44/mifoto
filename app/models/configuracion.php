@@ -8,6 +8,7 @@ use App\models\Menu;
 use App\models\Empresas;
 use App\models\Departamento;
 use App\models\Roles;
+use App\models\Permisos_rol;
 class configuracion extends Model
 {
     public static function verificar_usuario($usuario,$clave)
@@ -63,9 +64,11 @@ class configuracion extends Model
         return $roles;
     }
 
-    public static function get_permisos_rol($rol)
+    public static function permisos_rol($rol)
     {
-        $permisos=Menu::all();
+        $permisos=Permisos_rol::where('id_rol',$rol)
+                              ->orderBy('id', 'asc')
+                              ->get(['id_menu']);
         return $permisos;
     }
 

@@ -59,6 +59,10 @@
    </div>
 </section>
 <script>
+function ver_hijos(id)
+{
+
+}
 
 $(document).ready(function()
 {
@@ -152,13 +156,15 @@ $(document).ready(function()
             data:{rol:id_rol},
             success:function(data)
             {
+              alert(data);
               if(data!=0)
               {
 
                 var datos=JSON.parse(data);
-                for(var i=0;i<datos.length;i++)
+
+                for(var i=0;i<datos[0].length;i++)
                 {
-                  $('#permisos-body').append('<a class="btn btn-app"><i class="'+datos[i]['clase']+'"></i> '+datos[i]['nombre']+'</a>');
+                  $('#permisos-body').append('<a class="btn btn-app bg-red" onclick=ver_hijos('+datos[0][i]['id']+')><i class="'+datos[0][i]['clase']+'"></i> '+datos[0][i]['nombre']+'</a>');
                 }
               $('#permisos').attr('style','display:');
               }

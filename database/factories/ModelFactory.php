@@ -67,3 +67,17 @@ $factory->define(App\models\Roles::class, function (Faker\Generator $faker) {
         'visible' => $faker->name
     ];
 });
+
+$factory->define(App\models\Permisos_rol::class, function (Faker\Generator $faker) {
+    return [
+        'id' => $faker->name,
+        'id_menu' => $faker->name,
+        'id_rol' => $faker->name,
+        'id_depto' => $faker->name,
+        'id_empresa' => $faker->name,
+        'agregar' => $faker->name,
+        'eliminar' => $faker->name,
+        'reportes' => $faker->name,
+        'visible' => $faker->name
+    ];
+});

@@ -151,16 +151,16 @@ class ConfiguracionController extends Controller
     public function get_permisos_rol()
     {
       $rol=$_POST['rol'];
+      $arreglo=array();
       try{
-        $datos=configuracion::get_permisos_rol($rol);
-        if($datos)
+        $menus_padres=configuracion::all_menus();
+        $permisos=configuracion::permisos_rol($rol);
+        array_push($arreglo, $menus_padres);
+        if($permisos)
         {
-          return json_encode($datos);
+          array_push($arreglo, $permisos);
         }
-        else
-        {
-          return 0;
-        }
+        return json_encode($arreglo);
       }
       catch (Exception $e)
       {

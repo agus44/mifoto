@@ -20,10 +20,19 @@ class TableMenuSeeder extends Seeder
         		'visible'=>1
         	]);
 
+         factory(App\models\Menu::class)->create([
+                'nombre'=>'Mantenedores',
+                'id_padre'=>null,
+                'url'=>'/mantenedores/2',
+                'icono'=>null,
+                'clase'=>'fa fa-wrench',
+                'visible'=>1
+            ]);
+
         factory(App\models\Menu::class)->create([
                 'nombre'=>'Mantenedor Menús',
-                'id_padre'=>1,
-                'url'=>'/mant_menu/2',
+                'id_padre'=>2,
+                'url'=>'/mant_menu/3',
                 'icono'=>null,
                 'clase'=>'fa fa-navicon',
                 'visible'=>1
@@ -31,16 +40,16 @@ class TableMenuSeeder extends Seeder
 
         factory(App\models\Menu::class)->create([
                 'nombre'=>'Crear Menú',
-                'id_padre'=>2,
-                'url'=>'/crear_menu/3',
+                'id_padre'=>3,
+                'url'=>'/crear_menu/4',
                 'icono'=>null,
                 'clase'=>'fa fa-plus',
                 'visible'=>1
             ]);
         factory(App\models\Menu::class)->create([
                 'nombre'=>'Listado Menú',
-                'id_padre'=>2,
-                'url'=>'/Listado_menu/4',
+                'id_padre'=>3,
+                'url'=>'/Listado_menu/5',
                 'icono'=>null,
                 'clase'=>'fa fa-list-ol',
                 'visible'=>1
@@ -49,7 +58,7 @@ class TableMenuSeeder extends Seeder
         factory(App\models\Menu::class)->create([
                 'nombre'=>'Permisos',
                 'id_padre'=>1,
-                'url'=>'/permisos/5',
+                'url'=>'/permisos/6',
                 'icono'=>null,
                 'clase'=>'fa fa-lock',
                 'visible'=>1
@@ -57,16 +66,16 @@ class TableMenuSeeder extends Seeder
 
         factory(App\models\Menu::class)->create([
                 'nombre'=>'Permisos Por Rol',
-                'id_padre'=>5,
-                'url'=>'/permisos_rol/6',
+                'id_padre'=>6,
+                'url'=>'/permisos_rol/7',
                 'icono'=>null,
                 'clase'=>'fa fa-flag',
                 'visible'=>1
             ]);
         factory(App\models\Menu::class)->create([
                 'nombre'=>'Permisos Por Usuario',
-                'id_padre'=>5,
-                'url'=>'/Listado_menu/7',
+                'id_padre'=>6,
+                'url'=>'/Listado_menu/8',
                 'icono'=>null,
                 'clase'=>'fa fa-user',
                 'visible'=>1
