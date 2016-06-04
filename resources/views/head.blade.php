@@ -198,27 +198,59 @@
                     @endif
                     @endforeach
                     
-                        @if($menus_hijos)
-                        @foreach($menus as $menu1)
-                        
-                            @if($menu1->id_padre!==null)
-                            <li class="treeview">
-                            <a href="{{asset($menu1->url)}}"><i class="{{$menu1->clase}}"></i><span>{{$menu1->nombre}}</span> <i class="fa fa-angle-left pull-right"></i></a>
-                                <ul class="treeview-menu">
-                                @for($i=0;$i<count($menus_hijos);$i++)
-                                @for($t=0;$t<count($menus_hijos[$i]);$t++)
-                                @if($menus_hijos[$i][$t]->id_padre==$menu1->id)
-                                
-                                <li><a href="{{asset($menus_hijos[$i][$t]->url)}}"><i class="{{$menus_hijos[$i][$t]->clase}}"></i> {{$menus_hijos[$i][$t]->nombre}}</a></li>
-                                @endif
-                              @endfor
-                              @endfor
-                             </ul>
-                            </li>
-                            @endif
-                         @endforeach   
-                         @endif
-                      
+                <?php foreach($menus as $menu1)
+                      {
+                        if($menu1->id_padre!==null && $menus_hijos!="")
+                        {
+                            $cont=0;
+                            for($i=0;$i<count($menus_hijos);$i++)
+                            {
+                                for($t=0;$t<count($menus_hijos[$i]);$t++)
+                                {
+                                    if($menus_hijos[$i][$t]->id_padre==$menu1->id)
+                                    {
+                                        $cont=$cont+1;
+                                    }
+                                }
+                                if($cont>0)
+                                {?>
+                                    <li class="treeview">
+                                        <a href="#"><i class="{{$menu1->clase}}"></i><span>{{$menu1->nombre}}</span><i class="fa fa-angle-left pull-right"></i></a>        
+                                    <ul class="treeview-menu">
+                                <?php
+                                    for($i=0;$i<count($menus_hijos);$i++)
+                                    {
+                                        for($t=0;$t<count($menus_hijos[$i]);$t++)
+                                        {
+                                            if($menus_hijos[$i][$t]->id_padre==$menu1->id)
+                                            {
+                                            ?> 
+                                               <li><a href="{{asset($menus_hijos[$i][$t]->url)}}"><i class="{{$menus_hijos[$i][$t]->clase}}"></i> {{$menus_hijos[$i][$t]->nombre}}</a></li>         
+                                       <?php
+                                            }
+                                        }
+                                    }
+                                ?>
+                            </ul></li>
+                                <?php 
+                                }
+                                else
+                                {
+                                ?>
+                                    <li>
+                                        <a href="{{asset($menu1->url)}}"><i class="{{$menu1->clase}}"></i><span>{{$menu1->nombre}}</span></a>       
+                                    </li>
+                            <?php
+                                }
+                            }
+                        }
+                     }
+                                ?> 
+
+                             
+                     
+                     
+                    
                         
                     <li><a href="javascript:history.back()"><i class="fa fa-reply"></i><span>Volver</span></a></li>
                 </ul><!-- /.sidebar-menu -->

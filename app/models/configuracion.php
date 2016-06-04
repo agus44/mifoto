@@ -13,8 +13,13 @@ class configuracion extends Model
 {
     public static function verificar_usuario($usuario,$clave)
     {
-    	$sql="SELECT *FROM usuarios WHERE usuario='$usuario' AND pass='$clave'";
-    	$resultado=DB::select($sql);
+
+        $resultado=DB::table('usuarios')
+            ->select('usuarios.id', 'usuarios.usuario','usuarios.nombre','usuarios.id_rol','usuarios.id_depto','usuarios.id_empresa')
+            ->where('usuarios.usuario',$usuario)
+            ->where('usuarios.pass',$clave)
+            ->where('usuarios.visible',1)
+            ->get();
     	return $resultado;
     }
 
@@ -89,12 +94,14 @@ class configuracion extends Model
         return $permisos;
     }
 
-    public static function permisos_rol_hijos($menu,$rol)
+    public static function permisos_rol_hijos($menu,$rol,$depto,$empresa)
     {
         $permisos=DB::table('permisos_rol')
             ->select('menu.id', 'menu.nombre', 'menu.clase','menu.id_padre','menu.url')
             ->join('menu', 'permisos_rol.id_menu', '=', 'menu.id')
             ->where('permisos_rol.id_rol',$rol)
+            ->where('permisos_rol.id_depto',$depto)
+            ->where('permisos_rol.id_empresa',$empresa)
             ->where('permisos_rol.visible',1)
             ->where('menu.visible',1)
             ->where('menu.id_padre',$menu)

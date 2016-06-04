@@ -14,17 +14,21 @@ class TableUsuariosSeeder extends Seeder
         factory(App\models\Usuarios::class)->create([
         		'usuario'=>'pbarria',
         		'pass'=>'utemmacul1097',
+                'nombre'=>'Pablo Barría Reyes',
         		'id_rol'=>1,
-        		'nombre'=>'Pablo Barría Reyes',
-        		'id_empresa'=>1
+        		'id_depto'=>1,
+        		'id_empresa'=>1,
+                'visible'=>1
         	]);
 
         factory(App\models\Usuarios::class)->create([
         		'usuario'=>'evidal',
         		'pass'=>'r4p4nu1',
-        		'id_rol'=>1,
         		'nombre'=>'Eduardo Vidal',
-        		'id_empresa'=>1
+        		'id_rol'=>1,
+                'id_depto'=>1,
+                'id_empresa'=>1,
+                'visible'=>1
         	]);
     }
 }

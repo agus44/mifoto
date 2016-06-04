@@ -16,9 +16,11 @@ class CreaTablaUsuarios extends Migration
             $table->increments('id');
             $table->string('usuario')->unique();
             $table->string('pass');
-            $table->integer('id_rol');
             $table->string('nombre')->nullable();
+            $table->integer('id_rol');
+            $table->integer('id_depto');
             $table->integer('id_empresa');
+            $table->integer('visible');
             $table->timestamps();
         });
     }

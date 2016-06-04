@@ -51,7 +51,7 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="box box-info animated fadeInRight ">
             <div class="box-header with-border">
-                <h3 class="box-title">Menús</h3>
+                <h3 class="box-title">Acceso a módulos</h3>
             </div>
             <div class="box-body" id="permisos-body">
             </div>
@@ -68,6 +68,7 @@
 function ver_hijos2(id)
 {
   var activado=$('#activo'+id).val();
+  var rol=$('#rol').val();
   if(activado==0)
   {
   $('#submenus'+id).html('');
@@ -77,27 +78,46 @@ function ver_hijos2(id)
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      data:{menu:id},
+      data:{menu:id,rol:rol},
       success:function(data)
       {
         if(data!=0)
         {
           var datos=JSON.parse(data);
         
-          if(datos[1].length>0)
-          {
+          
             var sub="";
             $('#submenus'+id).append('<center><i class="'+datos[0][0]['clase']+'"></i>&nbsp;&nbsp;<strong>'+datos[0][0]['nombre']+'</strong></center>');
-            for(var i=0;i<datos[1].length;i++)
+            if(datos[1]!="")
             {
-              sub+='<a class="btn btn-app bg-red" onclick=ver_hijos2('+datos[1][i]['id']+')><i class="'+datos[1][i]['clase']+'"></i> '+datos[1][i]['nombre']+'</a><div class="bg-navy color-palette" id="submenus'+datos[1][i]['id']+'" style="display:none"></div><input type="hidden" id="activo'+datos[1][i]['id']+'" value=0 />';
-              
+              for(var i=0;i<datos[1].length;i++)
+              {
+                var class_estado="bg-red";
+                if(datos[2]!="")
+                {
+                  for(var t=0;t<datos[2].length;t++)
+                  {
+                    if(datos[1][i]['id']==datos[1][t]['id'])
+                    {
+                       var class_estado="bg-green";
+                       break;
+                    }
+                  }
+                }
+                sub+='<a class="btn btn-app '+class_estado+'" onclick=ver_hijos2('+datos[1][i]['id']+')><i class="'+datos[1][i]['clase']+'"></i> '+datos[1][i]['nombre']+'</a><div class="bg-navy color-palette" id="submenus'+datos[1][i]['id']+'" style="display:none"></div><input type="hidden" id="activo'+datos[1][i]['id']+'" value=0 />';
+                
+              }
+            }
+            else
+            {
+               $('#submenus'+id).append('<div class="alert alert-danger alert-dismissible"><h4><i class="icon fa fa-ban"></i>Sin Submenús</h4>Estimado usuario, dicho menú no contiene sub-módulos, puede activar o desactivar el módulo de todos modos.</div>');
             }
             $('#submenus'+id).append(sub);
             $('#submenus'+id).slideDown();
             $('#activo'+id).val(1);
 
-          }
+          
+          
          // $('#ver_submenus').modal();
         }
         else
@@ -120,33 +140,76 @@ function ver_hijos(id)
 {
    $('#titulo-submenus').html('');
    $('#submenu-body').html('');
+   var rol=$('#rol').val();
+   var depto=$('#depto').val();
+   var empresa=$('#empresa').val();
+   var estado=$('#estado'+id).val();
    $.ajax({
       url: '{{url()}}/get_permisos_rol_hijos',
       type: 'POST',
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      data:{menu:id},
+      data:{menu:id,rol:rol,depto:depto,empresa:empresa},
       success:function(data)
       {
         if(data!=0)
         {
           var datos=JSON.parse(data);
-          $('#titulo-submenus').append(datos[0][0]['nombre']+'&nbsp;&nbsp;<button class="btn btn-success">Activado</button>');
 
-          if(datos[1].length>0)
+          if(estado==0)
+          {
+            var button='<button class="btn bg-green" ><i class="fa fa-check"></i> Activar</button>';
+          }
+          else
+          {
+            var button='<button class="btn bg-red" ><i class="fa fa-close"></i> Desactivar</button>';
+          }
+
+          $('#titulo-submenus').append(datos[0][0]['nombre']+'&nbsp;&nbsp;'+button);
+
+          if(datos[1]!="")
           {
 
             for(var i=0;i<datos[1].length;i++)
             {
-              $('#submenu-body').append('<a class="btn btn-app bg-red" onclick=ver_hijos2('+datos[1][i]['id']+')><i class="'+datos[1][i]['clase']+'"></i> '+datos[1][i]['nombre']+'</a><div class="bg-navy color-palette" id="submenus'+datos[1][i]['id']+'" style="display:none"></div><input type="hidden" id="activo'+datos[1][i]['id']+'" value=0 />');
+              var class_estado="bg-red";
+              if(datos[2]!="")
+              {
+                for(var t=0;t<datos[2].length;t++)
+                {
+                  if(datos[1][i]['id']==datos[1][t]['id'])
+                  {
+                     var class_estado="bg-green";
+                     break;
+                  }
+                }
+              }
+              $('#submenu-body').append('<a class="btn btn-app '+class_estado+'" onclick=ver_hijos2('+datos[1][i]['id']+')><i class="'+datos[1][i]['clase']+'"></i> '+datos[1][i]['nombre']+'</a><div class="bg-navy color-palette" id="submenus'+datos[1][i]['id']+'" style="display:none"></div><input type="hidden" id="activo'+datos[1][i]['id']+'" value=0 />');
             }
+          }
+          else
+          {
+             $('#submenu-body').append('<div class="alert alert-danger alert-dismissible"><h4><i class="icon fa fa-ban"></i>Sin Submenús</h4>Estimado usuario, dicho menú no contiene sub-módulos, puede activar o desactivar el módulo de todos modos.</div>');
           }
           $('#ver_submenus').modal();
         }
         else
-        {
+        {/*
+            var datos=JSON.parse(data);
 
+            if(estado==0)
+            {
+              var button='<button class="btn btn-warning" disabled >Desactivado</button>';
+            }
+            else
+            {
+              var button='<button class="btn btn-info" disabled>Activado</button>';
+            }
+
+            $('#titulo-submenus').append(datos[0][0]['nombre']+'&nbsp;&nbsp;'+button);
+            $('#submenu-body').append('<div class="alert alert-danger alert-dismissible"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button><h4><i class="icon fa fa-ban"></i>Sin Submenús</h4>Estimado usuario, dicho menú no contien sub-módulos</div>');
+            $('#ver_submenus').modal();*/
         }
       }
     });
@@ -255,6 +318,7 @@ $(document).ready(function()
                 for(var i=0;i<datos[0].length;i++)
                 {
                    var class_aux="bg-red";
+                   var estado=0;
                   if(datos[1])
                   {
                     for(var t=0;t<datos[1].length;t++)
@@ -262,11 +326,12 @@ $(document).ready(function()
                       if(datos[0][i]['id']==datos[1][t]['id'])
                       {
                        var class_aux="bg-green";
+                       var estado=1;
                        break;
                       }
                     }
                   }
-                  $('#permisos-body').append('<a class="btn btn-app '+class_aux+'" onclick=ver_hijos('+datos[0][i]['id']+')><i class="'+datos[0][i]['clase']+'"></i> '+datos[0][i]['nombre']+'</a>');
+                  $('#permisos-body').append('<a class="btn btn-app '+class_aux+'" onclick=ver_hijos('+datos[0][i]['id']+')><i class="'+datos[0][i]['clase']+'"></i> '+datos[0][i]['nombre']+'</a><input type="hidden" name="estado'+datos[0][i]['id']+'" id="estado'+datos[0][i]['id']+'" value="'+estado+'" />');
                 }
               $('#permisos').attr('style','display:');
               }
@@ -279,5 +344,7 @@ $(document).ready(function()
     }
   });
 });
+
+
 </script>
 @include('footer')

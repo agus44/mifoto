@@ -60,6 +60,7 @@ class ConfiguracionController extends Controller
          Session::put('id_usuario',   $datos[0]->id);
          Session::put('nom_usuario', $datos[0]->usuario);
          Session::put('id_rol',         $datos[0]->id_rol);
+         Session::put('id_depto',         $datos[0]->id_depto);
          Session::put('nombre_completo',         $datos[0]->nombre);
          Session::put('id_empresa',  $datos[0]->id_empresa);
         return 1;
@@ -97,13 +98,13 @@ class ConfiguracionController extends Controller
       $data['subtitulo']="Sistema ERP TomahawkGT";
       $data['menus']=$this->menus_generales($menu);
       $data["menus_hijos"]=$this->menus_hijos($data['menus']);
-     // dd($data["menus_hijos"]);
+      //dd($data["menus_hijos"]);
       return view('configuracion.index',$data);
     }
 
     public function permisos_rol($menu)
     {
-      $data['titulo']="Permisos Por Rol de Usuario";
+      $data['titulo']="Permisos Por Rol ";
       $data['subtitulo']="Sistema ERP TomahawkGT";   
       $data['menus']=$this->menus_generales($menu);
       $data["menus_hijos"]=$this->menus_hijos($data['menus']);
@@ -175,19 +176,22 @@ class ConfiguracionController extends Controller
       try
       {
         $menu=$_POST['menu'];
+        $rol=$_POST['rol'];
+        $depto=$_POST['depto'];
+        $empresa=$_POST['empresa'];
         $array=array();
         $info_menu=configuracion::info_menu($menu);
         array_push($array,$info_menu);
-        $menus_hijos=$this->menus_generales($menu);
-        if($menus_hijos)
+        $menus_hijos=configuracion::menus_hijos($menu);
+        if(empty($menus_hijos))
         {
-          array_push($array,$menus_hijos);
-          return json_encode($array);
+          $menus_hijos="";
+          
         }
-        else
-        {
-          return 0;
-        }
+        $permisos=configuracion::permisos_rol_hijos($menu,$rol,$depto,$empresa);
+        array_push($array,$menus_hijos);
+        array_push($array,$permisos);
+        return json_encode($array);
       }
       catch (Exception $e)
       {
@@ -199,17 +203,21 @@ class ConfiguracionController extends Controller
     public function menus_generales($menu)
     {
        $rol=Session::get('id_rol');
-       $menus=configuracion::permisos_rol_hijos($menu,$rol);
+       $depto=Session::get('id_depto');
+       $empresa=Session::get('id_empresa');
+       $menus=configuracion::permisos_rol_hijos($menu,$rol,$depto,$empresa);
        return $menus;
     }
 
     public function menus_hijos($menus)
     {
       $rol=Session::get('id_rol');
+      $depto=Session::get('id_depto');
+      $empresa=Session::get('id_empresa');
       $menus_hijos=array();
       for($i=0;$i<count($menus);$i++)
       {
-        $mh=configuracion::permisos_rol_hijos($menus[$i]->id,$rol);
+        $mh=configuracion::permisos_rol_hijos($menus[$i]->id,$rol,$depto,$empresa);
         array_push($menus_hijos, $mh);
       }
 
