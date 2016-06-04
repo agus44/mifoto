@@ -66,9 +66,39 @@ class configuracion extends Model
 
     public static function permisos_rol($rol)
     {
-        $permisos=Permisos_rol::where('id_rol',$rol)
-                              ->orderBy('id', 'asc')
-                              ->get(['id_menu']);
+        $permisos=DB::table('permisos_rol')
+            ->select('menu.id', 'menu.nombre', 'menu.clase','menu.id_padre','menu.url')
+            ->join('menu', 'permisos_rol.id_menu', '=', 'menu.id')
+            ->where('permisos_rol.id_rol',$rol)
+            ->where('permisos_rol.visible',1)
+            ->where('menu.visible',1)
+            ->get();
+        return $permisos;
+    }
+
+    public static function permisos_rol_padre($rol)
+    {
+        $permisos=DB::table('permisos_rol')
+            ->select('menu.id', 'menu.nombre', 'menu.clase','menu.id_padre','menu.url')
+            ->join('menu', 'permisos_rol.id_menu', '=', 'menu.id')
+            ->where('permisos_rol.id_rol',$rol)
+            ->where('permisos_rol.visible',1)
+            ->where('menu.visible',1)
+            ->where('menu.id_padre',null)
+            ->get();
+        return $permisos;
+    }
+
+    public static function permisos_rol_hijos($menu,$rol)
+    {
+        $permisos=DB::table('permisos_rol')
+            ->select('menu.id', 'menu.nombre', 'menu.clase','menu.id_padre','menu.url')
+            ->join('menu', 'permisos_rol.id_menu', '=', 'menu.id')
+            ->where('permisos_rol.id_rol',$rol)
+            ->where('permisos_rol.visible',1)
+            ->where('menu.visible',1)
+            ->where('menu.id_padre',$menu)
+            ->get();
         return $permisos;
     }
 
@@ -78,6 +108,8 @@ class configuracion extends Model
                        ->get();
         return $info;
     }
+
+
 
 
 }

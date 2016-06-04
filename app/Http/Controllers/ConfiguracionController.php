@@ -76,7 +76,9 @@ class ConfiguracionController extends Controller
     {
         $data['titulo']='Últimas Noticias';
         $data['subtitulo']="Sistema ERP TomahawkGT";
-        $data['menus']=configuracion::all_menus();
+        $rol=Session::get('id_rol');
+        $data['menus']=configuracion::permisos_rol_padre($rol);
+        $data['menus_hijos']="";
         return view('home.slider',$data);
     }
 
@@ -196,16 +198,18 @@ class ConfiguracionController extends Controller
 
     public function menus_generales($menu)
     {
-       $menus=configuracion::menus_hijos($menu);
+       $rol=Session::get('id_rol');
+       $menus=configuracion::permisos_rol_hijos($menu,$rol);
        return $menus;
     }
 
     public function menus_hijos($menus)
     {
+      $rol=Session::get('id_rol');
       $menus_hijos=array();
       for($i=0;$i<count($menus);$i++)
       {
-        $mh=configuracion::menus_hijos($menus[$i]->id);
+        $mh=configuracion::permisos_rol_hijos($menus[$i]->id,$rol);
         array_push($menus_hijos, $mh);
       }
 

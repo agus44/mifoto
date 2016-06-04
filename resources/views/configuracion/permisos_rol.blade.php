@@ -234,6 +234,7 @@ $(document).ready(function()
     var id_rol=$('#rol').val();
     $('#permisos').attr('style','display:none');
     $('#permisos-body').html('');
+    
     if(id_rol>0)
     {
        $.ajax({
@@ -253,7 +254,19 @@ $(document).ready(function()
 
                 for(var i=0;i<datos[0].length;i++)
                 {
-                  $('#permisos-body').append('<a class="btn btn-app bg-red" onclick=ver_hijos('+datos[0][i]['id']+')><i class="'+datos[0][i]['clase']+'"></i> '+datos[0][i]['nombre']+'</a>');
+                   var class_aux="bg-red";
+                  if(datos[1])
+                  {
+                    for(var t=0;t<datos[1].length;t++)
+                    {
+                      if(datos[0][i]['id']==datos[1][t]['id'])
+                      {
+                       var class_aux="bg-green";
+                       break;
+                      }
+                    }
+                  }
+                  $('#permisos-body').append('<a class="btn btn-app '+class_aux+'" onclick=ver_hijos('+datos[0][i]['id']+')><i class="'+datos[0][i]['clase']+'"></i> '+datos[0][i]['nombre']+'</a>');
                 }
               $('#permisos').attr('style','display:');
               }

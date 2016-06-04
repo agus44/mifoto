@@ -198,7 +198,7 @@
                     @endif
                     @endforeach
                     
-                    
+                        @if($menus_hijos)
                         @foreach($menus as $menu1)
                         
                             @if($menu1->id_padre!==null)
@@ -217,6 +217,7 @@
                             </li>
                             @endif
                          @endforeach   
+                         @endif
                       
                         
                     <li><a href="javascript:history.back()"><i class="fa fa-reply"></i><span>Volver</span></a></li>
