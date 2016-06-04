@@ -72,5 +72,12 @@ class configuracion extends Model
         return $permisos;
     }
 
+    public static function info_menu($menu)
+    {
+        $info=Menu::where('id',$menu)
+                       ->get();
+        return $info;
+    }
+
 
 }

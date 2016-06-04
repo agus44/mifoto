@@ -168,6 +168,31 @@ class ConfiguracionController extends Controller
       }
     }
 
+    public function get_permisos_rol_hijos()
+    {
+      try
+      {
+        $menu=$_POST['menu'];
+        $array=array();
+        $info_menu=configuracion::info_menu($menu);
+        array_push($array,$info_menu);
+        $menus_hijos=$this->menus_generales($menu);
+        if($menus_hijos)
+        {
+          array_push($array,$menus_hijos);
+          return json_encode($array);
+        }
+        else
+        {
+          return 0;
+        }
+      }
+      catch (Exception $e)
+      {
+        return 0;
+      }
+    }
+
 
     public function menus_generales($menu)
     {

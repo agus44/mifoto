@@ -1,7 +1,10 @@
 @include('head')
+<style>
+
+</style>
 <section class="content">
    <div class="row">
-      <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+      <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 		<div class="box box-info animated fadeInRight">
 		    <div class="box-header with-border">
 		        <h3 class="box-title">Búsqueda de Permisos</h3>
@@ -57,11 +60,97 @@
         </div>
 	  
    </div>
+
+   @include('configuracion.ver_submenus')
 </section>
 <script>
+
+function ver_hijos2(id)
+{
+  var activado=$('#activo'+id).val();
+  if(activado==0)
+  {
+  $('#submenus'+id).html('');
+   $.ajax({
+      url: '{{url()}}/get_permisos_rol_hijos',
+      type: 'POST',
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data:{menu:id},
+      success:function(data)
+      {
+        if(data!=0)
+        {
+          var datos=JSON.parse(data);
+        
+          if(datos[1].length>0)
+          {
+            var sub="";
+            $('#submenus'+id).append('<center><i class="'+datos[0][0]['clase']+'"></i>&nbsp;&nbsp;<strong>'+datos[0][0]['nombre']+'</strong></center>');
+            for(var i=0;i<datos[1].length;i++)
+            {
+              sub+='<a class="btn btn-app bg-red" onclick=ver_hijos2('+datos[1][i]['id']+')><i class="'+datos[1][i]['clase']+'"></i> '+datos[1][i]['nombre']+'</a><div class="bg-navy color-palette" id="submenus'+datos[1][i]['id']+'" style="display:none"></div><input type="hidden" id="activo'+datos[1][i]['id']+'" value=0 />';
+              
+            }
+            $('#submenus'+id).append(sub);
+            $('#submenus'+id).slideDown();
+            $('#activo'+id).val(1);
+
+          }
+         // $('#ver_submenus').modal();
+        }
+        else
+        {
+
+        }
+      }
+    });
+  }
+  else
+  {
+     $('#submenus'+id).slideUp();
+     $('#activo'+id).val(0);
+  }
+   
+}
+
+
 function ver_hijos(id)
 {
+   $('#titulo-submenus').html('');
+   $('#submenu-body').html('');
+   $.ajax({
+      url: '{{url()}}/get_permisos_rol_hijos',
+      type: 'POST',
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data:{menu:id},
+      success:function(data)
+      {
+        if(data!=0)
+        {
+          var datos=JSON.parse(data);
+          $('#titulo-submenus').append(datos[0][0]['nombre']+'&nbsp;&nbsp;<button class="btn btn-success">Activado</button>');
 
+          if(datos[1].length>0)
+          {
+
+            for(var i=0;i<datos[1].length;i++)
+            {
+              $('#submenu-body').append('<a class="btn btn-app bg-red" onclick=ver_hijos2('+datos[1][i]['id']+')><i class="'+datos[1][i]['clase']+'"></i> '+datos[1][i]['nombre']+'</a><div class="bg-navy color-palette" id="submenus'+datos[1][i]['id']+'" style="display:none"></div><input type="hidden" id="activo'+datos[1][i]['id']+'" value=0 />');
+            }
+          }
+          $('#ver_submenus').modal();
+        }
+        else
+        {
+
+        }
+      }
+    });
+   
 }
 
 $(document).ready(function()
@@ -156,7 +245,7 @@ $(document).ready(function()
             data:{rol:id_rol},
             success:function(data)
             {
-              alert(data);
+
               if(data!=0)
               {
 
