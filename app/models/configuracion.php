@@ -116,6 +116,29 @@ class configuracion extends Model
         return $info;
     }
 
+    public static function existe_permiso_rol($menu,$rol,$depto,$empresa)
+    {
+        $permisos=DB::table('permisos_rol')
+            ->where('permisos_rol.id_rol',$rol)
+            ->where('permisos_rol.id_depto',$depto)
+            ->where('permisos_rol.id_empresa',$empresa)
+            ->where('permisos_rol.id_menu',$menu)
+            ->get();
+        return $permisos;
+    }
+
+    public static function update_permiso_rol($id,$data)
+    {
+        $update=DB::table('permisos_rol')->where('id', $id)->update($data);
+        return $update;
+    }
+
+    public static function insert_permiso_rol($data)
+    {
+         $id = DB::table('permisos_rol')->insert($data);
+        return $id;
+    }
+
 
 
 

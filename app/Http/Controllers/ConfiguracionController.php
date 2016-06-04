@@ -223,4 +223,27 @@ class ConfiguracionController extends Controller
 
       return $menus_hijos;
     }
+
+    public function actualizar_modulo_sinhijos()
+    {
+      $menu=$_POST['menu'];
+      $accion=$_POST['accion'];
+      $rol=$_POST['rol'];
+      $depto=$_POST['depto'];
+      $empresa=$_POST['empresa'];
+
+      $existe=configuracion::existe_permiso_rol($menu,$rol,$depto,$empresa);
+      if($existe)
+      {
+        $data=['visible'=>$accion];
+        $update=configuracion::update_permiso_rol($existe[0]->id,$data);
+        return $update;
+      }
+      else
+      {
+        $data=['id_menu'=>$menu,'id_rol'=>$rol,'id_depto'=>$depto,'id_empresa'=>$empresa,'agregar'=>1,'editar'=>1,'eliminar'=>1,'reportes'=>1,'visible'=>$accion];
+        $insert=configuracion::insert_permiso_rol($data);
+        return $insert;
+      }
+    }
 }

@@ -11,3 +11,4 @@ Route::post('/get_departamentos','ConfiguracionController@get_departamentos');
 Route::post('/get_roles','ConfiguracionController@get_roles');
 Route::post('/get_permisos_rol','ConfiguracionController@get_permisos_rol');
 Route::post('/get_permisos_rol_hijos','ConfiguracionController@get_permisos_rol_hijos');
+Route::post('/actualizar_modulo_sinhijos','ConfiguracionController@actualizar_modulo_sinhijos');

@@ -64,6 +64,117 @@
    @include('configuracion.ver_submenus')
 </section>
 <script>
+function buscar_permisos()
+{
+  var id_rol=$('#rol').val();
+    $('#permisos').attr('style','display:none');
+    $('#permisos-body').html('');
+    
+    if(id_rol>0)
+    {
+       $.ajax({
+            url: '{{url()}}/get_permisos_rol',
+            type: 'POST',
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:{rol:id_rol},
+            success:function(data)
+            {
+
+              if(data!=0)
+              {
+
+                var datos=JSON.parse(data);
+
+                for(var i=0;i<datos[0].length;i++)
+                {
+                   var class_aux="bg-red";
+                   var estado=0;
+                  if(datos[1])
+                  {
+                    for(var t=0;t<datos[1].length;t++)
+                    {
+                      if(datos[0][i]['id']==datos[1][t]['id'])
+                      {
+                       var class_aux="bg-green";
+                       var estado=1;
+                       break;
+                      }
+                    }
+                  }
+                  $('#permisos-body').append('<a class="btn btn-app '+class_aux+'" onclick=ver_hijos('+datos[0][i]['id']+')><i class="'+datos[0][i]['clase']+'"></i> '+datos[0][i]['nombre']+'</a><input type="hidden" name="estado'+datos[0][i]['id']+'" id="estado'+datos[0][i]['id']+'" value="'+estado+'" />');
+                }
+              $('#permisos').attr('style','display:');
+              }
+              else
+              {
+
+              }
+            }
+      });
+    }
+}
+function actualizar_modulo(id,accion)
+{
+  var tiene_hijos=$('#tiene_hijos').val();
+  var rol=$('#rol').val();
+  var depto=$('#depto').val();
+  var empresa=$('#empresa').val();
+  if(tiene_hijos==1)
+  {
+
+  }
+  else
+  {
+    if(accion==0)
+    {
+      var titulo="¿Desactivar módulo?";
+      var texto="Se desactivará el módulo para todos los usuarios que pertenezcan al rol y a la empresa seleccionada";
+      var acto="Desactivar";
+      var respuesta="El módulo ha sido desactivado correctamente";
+      var color="#CC0000";
+    }
+    else
+    {
+      var titulo="Activar módulo?";
+      var texto="Se activará el módulo para todos los usuarios que pertenezcan al rol y a la empresa seleccionada";
+      var acto="Activar";
+      var respuesta="El módulo ha sido activado correctamente";
+      var color="#00C92F";
+    }
+      swal({   title: titulo,   text: texto,   type: "info",   showCancelButton: true,   confirmButtonColor: color,   confirmButtonText: acto,   cancelButtonText: "Cancelar",   closeOnConfirm: false,   closeOnCancel: true },
+      function(isConfirm)
+      {   
+          if (isConfirm) 
+          {     $('#ver_submenus').modal('hide');
+             $.ajax({
+                  url: '{{url()}}/actualizar_modulo_sinhijos',
+                  type: 'POST',
+                  headers: {
+                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                  },
+                  data:{menu:id,accion:accion,rol:rol,depto:depto,empresa:empresa},
+                  success:function(data) 
+                  {
+                      if(data!=0 || data!==false || data!=="")
+                      {
+                        swal("Permiso Actualizado", respuesta, "success");
+                        setTimeout(function(){ swal.close();
+                          buscar_permisos();
+                         }, 1500);
+                      }
+                      else
+                      {
+                        swal("Error", "Se ha producido un problema al actualizar el permiso, inténtelo nuevamente", "error");
+                      }
+                  }
+              });
+                
+          }  
+      });
+  }
+}
 
 function ver_hijos2(id)
 {
@@ -161,18 +272,18 @@ function ver_hijos(id)
 
           if(estado==0)
           {
-            var button='<button class="btn bg-green" ><i class="fa fa-check"></i> Activar</button>';
+            var button='<button class="btn bg-green"  onclick="actualizar_modulo('+id+',1)"><i class="fa fa-check"></i> Activar</button>';
           }
           else
           {
-            var button='<button class="btn bg-red" ><i class="fa fa-close"></i> Desactivar</button>';
+            var button='<button class="btn bg-red" onclick="actualizar_modulo('+id+',0)"><i class="fa fa-close"></i> Desactivar</button>';
           }
 
           $('#titulo-submenus').append(datos[0][0]['nombre']+'&nbsp;&nbsp;'+button);
 
           if(datos[1]!="")
           {
-
+             $('#titulo-submenus').append('<input type="hidden" id="tiene_hijos" value=1 />');
             for(var i=0;i<datos[1].length;i++)
             {
               var class_estado="bg-red";
@@ -192,6 +303,7 @@ function ver_hijos(id)
           }
           else
           {
+            $('#titulo-submenus').append('<input type="hidden" id="tiene_hijos" value=0 />');
              $('#submenu-body').append('<div class="alert alert-danger alert-dismissible"><h4><i class="icon fa fa-ban"></i>Sin Submenús</h4>Estimado usuario, dicho menú no contiene sub-módulos, puede activar o desactivar el módulo de todos modos.</div>');
           }
           $('#ver_submenus').modal();
@@ -221,7 +333,6 @@ function ver_hijos(id)
 $(document).ready(function()
 {
 
-  swal({   title: "Ajax request example",   text: "Submit to run ajax request",   type: "info",   showCancelButton: true,   closeOnConfirm: false,   showLoaderOnConfirm: true});
   $('#empresa').change(function()
   {
     var id_emp=$('#empresa').val();
@@ -298,54 +409,7 @@ $(document).ready(function()
 
   $('#rol').change(function()
   {
-    var id_rol=$('#rol').val();
-    $('#permisos').attr('style','display:none');
-    $('#permisos-body').html('');
-    
-    if(id_rol>0)
-    {
-       $.ajax({
-            url: '{{url()}}/get_permisos_rol',
-            type: 'POST',
-            headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data:{rol:id_rol},
-            success:function(data)
-            {
-
-              if(data!=0)
-              {
-
-                var datos=JSON.parse(data);
-
-                for(var i=0;i<datos[0].length;i++)
-                {
-                   var class_aux="bg-red";
-                   var estado=0;
-                  if(datos[1])
-                  {
-                    for(var t=0;t<datos[1].length;t++)
-                    {
-                      if(datos[0][i]['id']==datos[1][t]['id'])
-                      {
-                       var class_aux="bg-green";
-                       var estado=1;
-                       break;
-                      }
-                    }
-                  }
-                  $('#permisos-body').append('<a class="btn btn-app '+class_aux+'" onclick=ver_hijos('+datos[0][i]['id']+')><i class="'+datos[0][i]['clase']+'"></i> '+datos[0][i]['nombre']+'</a><input type="hidden" name="estado'+datos[0][i]['id']+'" id="estado'+datos[0][i]['id']+'" value="'+estado+'" />');
-                }
-              $('#permisos').attr('style','display:');
-              }
-              else
-              {
-
-              }
-            }
-      });
-    }
+    buscar_permisos();
   });
 });
 
