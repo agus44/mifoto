@@ -69,6 +69,8 @@ function ver_hijos2(id)
 {
   var activado=$('#activo'+id).val();
   var rol=$('#rol').val();
+  var depto=$('#depto').val();
+  var empresa=$('#empresa').val();
   if(activado==0)
   {
   $('#submenus'+id).html('');
@@ -78,7 +80,7 @@ function ver_hijos2(id)
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       },
-      data:{menu:id,rol:rol},
+      data:{menu:id,rol:rol,depto:depto,empresa:empresa},
       success:function(data)
       {
         if(data!=0)
@@ -218,6 +220,8 @@ function ver_hijos(id)
 
 $(document).ready(function()
 {
+
+  swal({   title: "Ajax request example",   text: "Submit to run ajax request",   type: "info",   showCancelButton: true,   closeOnConfirm: false,   showLoaderOnConfirm: true});
   $('#empresa').change(function()
   {
     var id_emp=$('#empresa').val();
