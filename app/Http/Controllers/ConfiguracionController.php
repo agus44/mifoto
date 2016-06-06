@@ -246,4 +246,68 @@ class ConfiguracionController extends Controller
         return $insert;
       }
     }
+
+     public function actualizar_modulo_conhijos()
+    {
+      $menu=$_POST['menu'];
+      $accion=$_POST['accion'];
+      $rol=$_POST['rol'];
+      $depto=$_POST['depto'];
+      $empresa=$_POST['empresa'];
+      $existe=configuracion::existe_permiso_rol($menu,$rol,$depto,$empresa);
+      if($existe)
+      {
+        $data=['visible'=>$accion];
+        $update=configuracion::update_permiso_rol($existe[0]->id,$data);
+        if($update)
+        {
+          $this->recursivo_permisos_rol($menu,$accion,$rol,$depto,$empresa);
+          return $update;
+        }
+        else
+        {
+          return 0;
+        }
+      }
+      else
+      {
+        $data=['id_menu'=>$menu,'id_rol'=>$rol,'id_depto'=>$depto,'id_empresa'=>$empresa,'agregar'=>1,'editar'=>1,'eliminar'=>1,'reportes'=>1,'visible'=>$accion];
+        $insert=configuracion::insert_permiso_rol($data);
+        if($insert)
+        {
+           $this->recursivo_permisos_rol($menu,$accion,$rol,$depto,$empresa);
+           return $insert;
+        }
+        else
+        {
+          return 0;
+        }
+      }
+
+    }
+
+    public function recursivo_permisos_rol($menu,$accion,$rol,$depto,$empresa)
+    {
+        $menus_hijos=configuracion::menus_hijos($menu);
+
+        if($menus_hijos)
+        {
+          for($i=0;$i<count($menus_hijos);$i++)
+          { 
+            $existe=configuracion::existe_permiso_rol($menus_hijos[$i]->id,$rol,$depto,$empresa);
+            if($existe)
+            {
+              $data=['visible'=>$accion];
+              $update=configuracion::update_permiso_rol($existe[0]->id,$data);
+              $this->recursivo_permisos_rol($menus_hijos[$i]->id,$accion,$rol,$depto,$empresa);
+            }
+            else
+            {
+               $data=['id_menu'=>$menus_hijos[$i]->id,'id_rol'=>$rol,'id_depto'=>$depto,'id_empresa'=>$empresa,'agregar'=>1,'editar'=>1,'eliminar'=>1,'reportes'=>1,'visible'=>$accion];
+               $insert=configuracion::insert_permiso_rol($data);
+               $this->recursivo_permisos_rol($menus_hijos[$i]->id,$accion,$rol,$depto,$empresa);
+            }
+          }
+        }
+    }
 }

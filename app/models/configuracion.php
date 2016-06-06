@@ -129,6 +129,7 @@ class configuracion extends Model
 
     public static function update_permiso_rol($id,$data)
     {
+        echo "llega este id".$id;
         $update=DB::table('permisos_rol')->where('id', $id)->update($data);
         return $update;
     }

@@ -115,6 +115,80 @@ function buscar_permisos()
       });
     }
 }
+
+function actualizar_modulo_completo(id,accion,rol,depto,empresa)
+{
+  swal.close();
+  $('#ver_submenus').modal('hide');
+  $.ajax({
+        url: '{{url()}}/actualizar_modulo_conhijos',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data:{menu:id,accion:accion,rol:rol,depto:depto,empresa:empresa},
+        success:function(data) 
+        {
+            if(data!=0 || data!==false || data!=="")
+            {
+              if(accion==1)
+              {
+                var respuesta="El módulo ha sido activado correctamente";
+              }
+              else
+              {
+                var respuesta="El módulo ha sido desactivado correctamente";
+              }
+              swal("Permiso Actualizado", respuesta, "success");
+              setTimeout(function(){ swal.close();
+              buscar_permisos();
+            }, 1500);
+            }
+            else
+            {
+              swal("Error", "Se ha producido un problema al actualizar el permiso, inténtelo nuevamente", "error");
+            }
+        }
+        });
+
+}
+
+function actualizar_modulo_sinhijos(id,accion,rol,depto,empresa)
+{
+    swal.close();
+    $('#ver_submenus').modal('hide');
+    $.ajax({
+        url: '{{url()}}/actualizar_modulo_sinhijos',
+        type: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data:{menu:id,accion:accion,rol:rol,depto:depto,empresa:empresa},
+        success:function(data) 
+        {
+            if(data!=0 || data!==false || data!=="")
+            {
+              if(accion==1)
+              {
+                var respuesta="El módulo ha sido activado correctamente";
+              }
+              else
+              {
+                var respuesta="El módulo ha sido desactivado correctamente";
+              }
+              swal("Permiso Actualizado", respuesta, "success");
+              setTimeout(function(){ swal.close();
+              buscar_permisos();
+            }, 1500);
+            }
+            else
+            {
+              swal("Error", "Se ha producido un problema al actualizar el permiso, inténtelo nuevamente", "error");
+            }
+        }
+        });
+  
+}
 function actualizar_modulo(id,accion)
 {
   var tiene_hijos=$('#tiene_hijos').val();
@@ -123,6 +197,28 @@ function actualizar_modulo(id,accion)
   var empresa=$('#empresa').val();
   if(tiene_hijos==1)
   {
+    if(accion==0)
+    {
+      var titulo="¿Desactivar módulo?";
+      var texto='Debe seleccionar el tipo de desactivación antes de continuar<br><div onclick="actualizar_modulo_completo('+id+','+accion+','+rol+','+depto+','+empresa+');"><button class="btn btn-danger" style="background-color:#CC0000">Módulo Completo</button></div>&nbsp;&nbsp;<div onclick="actualizar_modulo_sinhijos('+id+','+accion+','+rol+','+depto+','+empresa+');"><button class="btn btn-primary" style="background-color:#3005AF" >Módulo sin componentes</button></div>';    
+      var respuesta="El módulo ha sido desactivado correctamente";
+    }
+    else
+    {
+      var titulo="¿Activar módulo?";
+      var texto='Debe seleccionar el tipo de activación antes de continuar<br><div onclick="actualizar_modulo_completo('+id+','+accion+','+rol+','+depto+','+empresa+');"><button class="btn btn-success" style="background-color:#00C92F">Módulo Completo</button></div>&nbsp;&nbsp;<div onclick="actualizar_modulo_sinhijos('+id+','+accion+','+rol+','+depto+','+empresa+');"><button class="btn btn-primary" style="background-color:#3005AF">Módulo sin componentes</button></div>';
+      var respuesta="El módulo ha sido activado correctamente";
+    }
+
+    swal({  title: titulo,
+                    text: texto,        
+                    html: true,
+                    showConfirmButton:false,
+                    cancelButtonText: "Cerrar",
+                    showCancelButton: true,   
+                             
+                });
+
 
   }
   else
@@ -147,30 +243,8 @@ function actualizar_modulo(id,accion)
       function(isConfirm)
       {   
           if (isConfirm) 
-          {     $('#ver_submenus').modal('hide');
-             $.ajax({
-                  url: '{{url()}}/actualizar_modulo_sinhijos',
-                  type: 'POST',
-                  headers: {
-                      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                  },
-                  data:{menu:id,accion:accion,rol:rol,depto:depto,empresa:empresa},
-                  success:function(data) 
-                  {
-                      if(data!=0 || data!==false || data!=="")
-                      {
-                        swal("Permiso Actualizado", respuesta, "success");
-                        setTimeout(function(){ swal.close();
-                          buscar_permisos();
-                         }, 1500);
-                      }
-                      else
-                      {
-                        swal("Error", "Se ha producido un problema al actualizar el permiso, inténtelo nuevamente", "error");
-                      }
-                  }
-              });
-                
+          {     
+               actualizar_modulo_sinhijos(id,accion,rol,depto,empresa);
           }  
       });
   }
