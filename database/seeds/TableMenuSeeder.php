@@ -89,6 +89,35 @@ class TableMenuSeeder extends Seeder
                 'clase'=>'fa fa-shopping-cart',
                 'visible'=>1
             ]);
+
+          factory(App\models\Menu::class)->create([
+                'nombre'=>'Logística',
+                'id_padre'=>null,
+                'url'=>'/logistica/10',
+                'icono'=>null,
+                'clase'=>'fa fa-sitemap',
+                'visible'=>1
+            ]);
+
+           factory(App\models\Menu::class)->create([
+                'nombre'=>'Bodegas',
+                'id_padre'=>10,
+                'url'=>'/bodegas/11',
+                'icono'=>null,
+                'clase'=>'fa fa-cubes',
+                'visible'=>1
+            ]);
+
+           factory(App\models\Menu::class)->create([
+                'nombre'=>'Sistema stock',
+                'id_padre'=>10,
+                'url'=>'/stock/12',
+                'icono'=>null,
+                'clase'=>'fa fa-cube',
+                'visible'=>1
+            ]);
+
+
         
     }
 }

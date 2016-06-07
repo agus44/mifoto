@@ -63,6 +63,7 @@ class ConfiguracionController extends Controller
          Session::put('nom_rol',         $datos[0]->nom_rol);
          Session::put('id_depto',         $datos[0]->id_depto);
          Session::put('nombre_completo',         $datos[0]->nombre);
+         Session::put('imagen',         $datos[0]->imagen);
          Session::put('id_empresa',  $datos[0]->id_empresa);
         return 1;
       }

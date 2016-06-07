@@ -15,7 +15,7 @@ class configuracion extends Model
     {
 
         $resultado=DB::table('usuarios')
-            ->select('usuarios.id', 'usuarios.usuario','usuarios.nombre','usuarios.id_rol','usuarios.id_depto','usuarios.id_empresa','roles.nombre as nom_rol')
+            ->select('usuarios.id', 'usuarios.usuario','usuarios.nombre','usuarios.id_rol','usuarios.id_depto','usuarios.id_empresa','roles.nombre as nom_rol','usuarios.imagen')
             ->join('roles', 'usuarios.id_rol', '=', 'roles.id')
             ->where('usuarios.usuario',$usuario)
             ->where('usuarios.pass',$clave)
@@ -136,7 +136,7 @@ class configuracion extends Model
 
     public static function insert_permiso_rol($data)
     {
-         $id = DB::table('permisos_rol')->insert($data);
+         $id = DB::table('permisos_rol')->insertGetId($data);
         return $id;
     }
 

@@ -40,7 +40,7 @@
                                             <a href="#">
                                                 <div class="pull-left">
                                                     <!-- User Image -->
-                                                    <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="img-circle" alt="User Image"/>
+    <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('imagen')) }}" class="img-circle" alt="User Image"/>
                                                 </div>
                                                 <!-- Message title and timestamp -->
                                                 <h4>
@@ -119,14 +119,14 @@
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <!-- The user image in the navbar-->
-                                <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="user-image" alt="User Image"/>
+                                <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('imagen'))}}" class="user-image" alt="User Image"/>
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                                 <span class="hidden-xs">{{Session::get('nombre_completo')}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="img-circle" alt="User Image" />
+                                    <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('imagen')) }}" class="img-circle" alt="User Image" />
                                     <p>
                                         {{Session::get('nombre_completo')}} - {{Session::get('nom_rol')}}
                                         <small>Member since Nov. 2012</small>
@@ -168,7 +168,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
                     <div class="pull-left image">
-                        <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="img-circle" alt="User Image" />
+                        <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('imagen')) }}" class="img-circle" alt="User Image" />
                     </div>
                     <div class="pull-left info">
                         <p>{{Session::get('nombre_completo')}}</p>

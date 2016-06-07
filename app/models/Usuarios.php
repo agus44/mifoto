@@ -8,5 +8,5 @@ class Usuarios extends Model
 {
     protected $table ="usuarios";
 
-    protected $fillable=['id','usuario','pass','nombre','id_rol','id_depto','id_empresa','visible'];
+    protected $fillable=['id','usuario','pass','nombre','imagen','id_rol','id_depto','id_empresa','visible'];
 }
