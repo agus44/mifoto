@@ -15,7 +15,8 @@ class configuracion extends Model
     {
 
         $resultado=DB::table('usuarios')
-            ->select('usuarios.id', 'usuarios.usuario','usuarios.nombre','usuarios.id_rol','usuarios.id_depto','usuarios.id_empresa')
+            ->select('usuarios.id', 'usuarios.usuario','usuarios.nombre','usuarios.id_rol','usuarios.id_depto','usuarios.id_empresa','roles.nombre as nom_rol')
+            ->join('roles', 'usuarios.id_rol', '=', 'roles.id')
             ->where('usuarios.usuario',$usuario)
             ->where('usuarios.pass',$clave)
             ->where('usuarios.visible',1)

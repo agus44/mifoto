@@ -30,5 +30,15 @@ class TableUsuariosSeeder extends Seeder
                 'id_empresa'=>1,
                 'visible'=>1
         	]);
+
+        factory(App\models\Usuarios::class)->create([
+                'usuario'=>'william',
+                'pass'=>'12345',
+                'nombre'=>'William Industrial',
+                'id_rol'=>28,
+                'id_depto'=>9,
+                'id_empresa'=>2,
+                'visible'=>1
+            ]);
     }
 }

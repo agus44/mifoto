@@ -128,7 +128,7 @@
                                 <li class="user-header">
                                     <img src="{{ asset('archivos_empresas/'.Session::get('id_empresa').'/profiles/'.Session::get('id_usuario').'.jpg') }}" class="img-circle" alt="User Image" />
                                     <p>
-                                        {{Session::get('nombre_completo')}} - Web Developer
+                                        {{Session::get('nombre_completo')}} - {{Session::get('nom_rol')}}
                                         <small>Member since Nov. 2012</small>
                                     </p>
                                 </li>
