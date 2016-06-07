@@ -11,7 +11,7 @@ body{
 <body >
 <div class="login-box animated fadeInDown">
       <div class="login-logo">
-        <a href="../../index2.html" style="color:#ffffff"><b >Titan Development Solutions</b><br> Tomahawk Sytem</a>
+        <a href="../../index2.html" style="color:#ffffff"><b ><img src="{{asset('/archivos_empresas/1/logo.jpg')}}" width="40%"/></b><br> Tomahawk Sytem</a>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Ingresa para iniciar tu sesión</p>
