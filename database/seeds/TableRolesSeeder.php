@@ -166,5 +166,17 @@ class TableRolesSeeder extends Seeder
                 'id_depto'=>8,
                 'visible'=>1
             ]);
+
+         factory(App\models\Roles::class)->create([
+                'nombre'=>'Supervisor',
+                'id_depto'=>8,
+                'visible'=>1
+            ]);
+
+         factory(App\models\Roles::class)->create([
+                'nombre'=>'Vendedor',
+                'id_depto'=>9,
+                'visible'=>1
+            ]);
     }
 }

@@ -191,6 +191,7 @@ function actualizar_modulo_sinhijos(id,accion,rol,depto,empresa)
 }
 function actualizar_modulo(id,accion)
 {
+  
   var tiene_hijos=$('#tiene_hijos').val();
   var rol=$('#rol').val();
   var depto=$('#depto').val();
@@ -281,7 +282,7 @@ function ver_hijos2(id)
             {
               var subbutton='<button class="btn btn-success" onclick="actualizar_modulo('+datos[0][0]['id']+',1)">Activar</button>';
             }
-            $('#submenus'+id).append('<br><center><i class="'+datos[0][0]['clase']+'"></i>&nbsp;&nbsp;<strong>'+datos[0][0]['nombre']+'</strong>&nbsp;&nbsp;'+subbutton+'</center>');
+            $('#submenus'+id).append('<br><center><i class="'+datos[0][0]['clase']+'"></i>&nbsp;&nbsp;<strong>'+datos[0][0]['nombre']+'</strong>&nbsp;&nbsp;<input type="hidden" id="tiene_hijos" value=1 />'+subbutton+'</center>');
             if(datos[1]!="")
             {
               for(var i=0;i<datos[1].length;i++)
@@ -292,7 +293,7 @@ function ver_hijos2(id)
                 {
                   for(var t=0;t<datos[2].length;t++)
                   {
-                    if(datos[1][i]['id']==datos[1][t]['id'])
+                    if(datos[1][i]['id']==datos[2][t]['id'])
                     {
                       var sub_estado2=1;
                        var class_estado="bg-green";
