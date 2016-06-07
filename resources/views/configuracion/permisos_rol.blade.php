@@ -271,10 +271,8 @@ function ver_hijos2(id)
         if(data!=0)
         {
           var datos=JSON.parse(data);
-        
-          
             var sub="";
-            $('#submenus'+id).append('<center><i class="'+datos[0][0]['clase']+'"></i>&nbsp;&nbsp;<strong>'+datos[0][0]['nombre']+'</strong></center>');
+            $('#submenus'+id).append('<br><center><i class="'+datos[0][0]['clase']+'"></i>&nbsp;&nbsp;<strong>'+datos[0][0]['nombre']+'</strong>&nbsp;&nbsp;<button class="btn btn-danger">Desactivar</button></center>');
             if(datos[1]!="")
             {
               for(var i=0;i<datos[1].length;i++)
