@@ -376,7 +376,7 @@ function ver_hijos(id)
               {
                 for(var t=0;t<datos[2].length;t++)
                 {
-                  if(datos[1][i]['id']==datos[1][t]['id'])
+                  if(datos[1][i]['id']==datos[2][t]['id'])
                   {
                      var class_estado="bg-green";
                      var sub_estado=1;
