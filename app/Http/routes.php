@@ -16,3 +16,4 @@ Route::post('/actualizar_modulo_conhijos','ConfiguracionController@actualizar_mo
 Route::get('/logistica/{menu}','LogisticaController@index');
 Route::get('/mantenedores/{menu}','MantenedoresController@index');
 Route::get('/crear_menu/{menu}','MantenedoresController@crear_menu');
+Route::get('/bodegas/{menu}','LogisticaController@bodegas');

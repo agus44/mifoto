@@ -100,18 +100,27 @@ class TableMenuSeeder extends Seeder
             ]);
 
            factory(App\models\Menu::class)->create([
-                'nombre'=>'Bodegas',
+                'nombre'=>'Almacenamiento Logístico',
                 'id_padre'=>10,
-                'url'=>'/bodegas/11',
+                'url'=>'/almacenamiento_logistico/11',
+                'icono'=>null,
+                'clase'=>'fa fa-archive',
+                'visible'=>1
+            ]);
+
+           factory(App\models\Menu::class)->create([
+                'nombre'=>'Bodegas',
+                'id_padre'=>11,
+                'url'=>'/bodegas/12',
                 'icono'=>null,
                 'clase'=>'fa fa-cubes',
                 'visible'=>1
             ]);
 
            factory(App\models\Menu::class)->create([
-                'nombre'=>'Sistema stock',
-                'id_padre'=>10,
-                'url'=>'/stock/12',
+                'nombre'=>'Sistema de Stock',
+                'id_padre'=>11,
+                'url'=>'/sistema_stok/13',
                 'icono'=>null,
                 'clase'=>'fa fa-cube',
                 'visible'=>1

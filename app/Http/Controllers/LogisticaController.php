@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use Cache;
 use Validator;
+use App\models\logistica;
 
 class LogisticaController extends Controller
 {
@@ -22,76 +23,22 @@ class LogisticaController extends Controller
     {
       $data['titulo']='Logística';
       $data['subtitulo']="Sistema ERP Tomahawk";
-      $data['menus_padres']=app('App\Http\Controllers\ConfiguracionController')->menus_generales($menu);
-      $data['menus']="";
-      $data["menus_hijos"]="";
+      $data['menus_padres']="";
+      $data['menus']=app('App\Http\Controllers\ConfiguracionController')->menus_generales($menu);
+      $data["menus_hijos"]=app('App\Http\Controllers\ConfiguracionController')->menus_hijos($data['menus']);
      // dd($data["menus_hijos"]);
       return view('logistica.index',$data);     
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function bodegas($menu)
     {
-        //
+      $data['titulo']='Sistema de Bodegas';
+      $data['subtitulo']="Sistema ERP Tomahawk";
+      $data['menus_padres']=app('App\Http\Controllers\ConfiguracionController')->menus_generales($menu);
+      $data['menus']="";
+      $data["menus_hijos"]=""; 
+      return view('logistica.bodegas',$data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+    
 }
