@@ -78,9 +78,10 @@ class ConfiguracionController extends Controller
     public function home()
     {
         $data['titulo']='Últimas Noticias';
-        $data['subtitulo']="Sistema ERP TomahawkGT";
+        $data['subtitulo']="Sistema ERP Tomahawk";
         $rol=Session::get('id_rol');
-        $data['menus']=configuracion::permisos_rol_padre($rol);
+        $data['menus_padres']=configuracion::permisos_rol_padre($rol);
+        $data['menus']="";
         $data['menus_hijos']="";
         return view('home.slider',$data);
     }
@@ -97,7 +98,8 @@ class ConfiguracionController extends Controller
     public function configuracion($menu)
     {
       $data['titulo']='Configuración';
-      $data['subtitulo']="Sistema ERP TomahawkGT";
+      $data['subtitulo']="Sistema ERP Tomahawk";
+      $data['menus_padres']="";
       $data['menus']=$this->menus_generales($menu);
       $data["menus_hijos"]=$this->menus_hijos($data['menus']);
       //dd($data["menus_hijos"]);
@@ -107,7 +109,8 @@ class ConfiguracionController extends Controller
     public function permisos_rol($menu)
     {
       $data['titulo']="Permisos Por Rol ";
-      $data['subtitulo']="Sistema ERP TomahawkGT";   
+      $data['subtitulo']="Sistema ERP Tomahawk"; 
+      $data["menus_padres"]="";  
       $data['menus']=$this->menus_generales($menu);
       $data["menus_hijos"]=$this->menus_hijos($data['menus']);
       $data["empresas"]=configuracion::all_empresas();
@@ -312,4 +315,6 @@ class ConfiguracionController extends Controller
           }
         }
     }
+
+    
 }

@@ -13,3 +13,6 @@ Route::post('/get_permisos_rol','ConfiguracionController@get_permisos_rol');
 Route::post('/get_permisos_rol_hijos','ConfiguracionController@get_permisos_rol_hijos');
 Route::post('/actualizar_modulo_sinhijos','ConfiguracionController@actualizar_modulo_sinhijos');
 Route::post('/actualizar_modulo_conhijos','ConfiguracionController@actualizar_modulo_conhijos');
+Route::get('/logistica/{menu}','LogisticaController@index');
+Route::get('/mantenedores/{menu}','MantenedoresController@index');
+Route::get('/crear_menu/{menu}','MantenedoresController@crear_menu');

@@ -192,13 +192,17 @@
                 <ul class="sidebar-menu">
                     <li class="header"><a href="{{asset('/home')}}"><i class="fa fa-home"></i>&nbsp;<span>HOME</span></a></li>
                     <!-- Optionally, you can add icons to the links -->
-                    @foreach($menus as $row)
-                    @if($row->id_padre===null)
-                    <li><a href="{{asset($row->url)}}"><i class="{{$row->clase}}"></i><span>{{$row->nombre}}</span></a></li>
-                    @endif
-                    @endforeach
+                    @if($menus_padres)
+                    @foreach($menus_padres as $row)
                     
-                <?php foreach($menus as $menu1)
+                    <li><a href="{{asset($row->url)}}"><i class="{{$row->clase}}"></i><span>{{$row->nombre}}</span></a></li>
+                    @endforeach
+                    @endif
+                    
+                <?php 
+                      if($menus!="")
+                      {
+                      foreach($menus as $menu1)
                       {
                         if($menu1->id_padre!==null && $menus_hijos!="")
                         {
@@ -207,7 +211,7 @@
                             {
                                 for($t=0;$t<count($menus_hijos[$i]);$t++)
                                 {
-                                    if($menus_hijos[$i][$t]->id_padre==$menu1->id)
+                                    if($menus_hijos[$i][$t]->id_padre==$menu1->id && $menus_hijos[$i][$t]->id_padre!="" )
                                     {
                                         $cont=$cont+1;
                                     }
@@ -245,6 +249,7 @@
                             }
                         }
                      }
+                 }
                                 ?> 
 
                              
