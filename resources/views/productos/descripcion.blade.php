@@ -1,7 +1,7 @@
 <div class="box box-info">
             <div class="box-header">
-              <h3 class="box-title">CK Editor
-                <small>Advanced and full of features</small>
+              <h3 class="box-title">Descripción del producto
+                <small>Texto visible para clientes y usuarios</small>
               </h3>
               <!-- tools box -->
               <div class="pull-right box-tools">
