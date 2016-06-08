@@ -126,6 +126,15 @@ class TableMenuSeeder extends Seeder
                 'visible'=>1
             ]);
 
+           factory(App\models\Menu::class)->create([
+                'nombre'=>'Productos',
+                'id_padre'=>null,
+                'url'=>'/productos/14',
+                'icono'=>null,
+                'clase'=>'fa fa-barcode',
+                'visible'=>1
+            ]);
+
 
         
     }

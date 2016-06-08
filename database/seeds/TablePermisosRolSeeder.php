@@ -175,5 +175,17 @@ class TablePermisosRolSeeder extends Seeder
                 'reportes'=>1,
                 'visible'=>1
             ]); 
+
+          factory(App\models\Permisos_rol::class)->create([
+                'id_menu'=>14,
+                'id_rol'=>29,
+                'id_depto'=>9,
+                'id_empresa'=>2,
+                'agregar'=>1,
+                'editar'=>1,
+                'eliminar'=>1,
+                'reportes'=>1,
+                'visible'=>1
+            ]); 
     }
 }

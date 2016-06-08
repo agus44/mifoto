@@ -178,5 +178,11 @@ class TableRolesSeeder extends Seeder
                 'id_depto'=>9,
                 'visible'=>1
             ]);
+
+         factory(App\models\Roles::class)->create([
+                'nombre'=>'Jefe de Ventas',
+                'id_depto'=>9,
+                'visible'=>1
+            ]);
     }
 }
